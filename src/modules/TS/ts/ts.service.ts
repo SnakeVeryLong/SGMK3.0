@@ -14,7 +14,13 @@ export class TsService {
         return this.tsrepository.find();
     }
 
+    findOne(id: string): Promise<TS>{
+        return this.tsrepository.findOne(TS[id])
+    }
+
     async remove(idForTS: string): Promise<void> {
         await this.tsrepository.delete(idForTS);
     }
+
+    
 }
