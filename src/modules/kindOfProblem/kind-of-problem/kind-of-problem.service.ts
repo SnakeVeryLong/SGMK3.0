@@ -7,19 +7,19 @@ import { KindOfProblem } from '../entity/kindOfProblem';
 export class KindOfProblemService {
     constructor (
         @InjectRepository(KindOfProblem)
-        private tsrepository: Repository<KindOfProblem>,
+        private koprepository: Repository<KindOfProblem>,
     ) {}
 
     findAll(): Promise<KindOfProblem[]> {
-        return this.tsrepository.find();
+        return this.koprepository.find();
     }
 
     findOne(id: string): Promise<KindOfProblem>{
-        return this.tsrepository.findOne(KindOfProblem[id])
+        return this.koprepository.findOne(KindOfProblem[id])
     }
 
-    async remove(idForTS: string): Promise<void> {
-        await this.tsrepository.delete(idForTS);
+    async remove(id: string): Promise<void> {
+        await this.koprepository.delete(id);
     }
 
 }

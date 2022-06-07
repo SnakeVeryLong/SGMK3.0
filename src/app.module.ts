@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TSModule } from './modules/TS/TS.module';
+import { KOPModule } from './modules/kindOfProblem/kindOfProblem.module';
+import { cargoModule } from './modules/Cargo/cargo.module';
 
 
 
@@ -17,7 +19,7 @@ import { TSModule } from './modules/TS/TS.module';
     entities: [],
     synchronize: true,
     autoLoadEntities: true
-  }), TSModule],
+  }), TSModule, KOPModule, cargoModule],
   controllers: [AppController],
   providers: [AppService],
 })
