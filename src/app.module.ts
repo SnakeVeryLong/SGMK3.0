@@ -5,6 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TSModule } from './modules/TS/TS.module';
 import { KOPModule } from './modules/kindOfProblem/kindOfProblem.module';
 import { cargoModule } from './modules/Cargo/cargo.module';
+import { KindOfCargo } from './modules/kindOfCargo/entity/kindOfCargo.entity';
+import { KindOfProblem } from './modules/kindOfProblem/entity/kindOfProblem';
+import { Problems } from './modules/Problems/entity/problems.entity';
 
 
 
@@ -19,7 +22,7 @@ import { cargoModule } from './modules/Cargo/cargo.module';
     entities: [],
     synchronize: true,
     autoLoadEntities: true
-  }), TSModule, KOPModule, cargoModule],
+  }), TSModule, KOPModule, cargoModule, KindOfCargo, KindOfProblem, Problems],
   controllers: [AppController],
   providers: [AppService],
 })

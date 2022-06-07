@@ -1,5 +1,4 @@
 import { Body, Controller, Get, HttpStatus, Param, Post, Put, Query, Req, Res } from '@nestjs/common';
-import { query, Response } from 'express';
 import { TS } from './entities/TS.entity';
 
 @Controller()
