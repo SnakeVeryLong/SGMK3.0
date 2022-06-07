@@ -10,6 +10,8 @@ import { ProblemsModule } from './modules/Problems/problems.module';
 import { ReceptionModule } from './modules/Reception/Reception.module';
 import { statusModule } from './modules/Status/status.module';
 import { roleModule } from './modules/Role/role.module';
+import { userModule } from './modules/User/user.module';
+import { permissionModule } from './modules/permission/permission.module';
 
 
 
@@ -24,11 +26,9 @@ import { roleModule } from './modules/Role/role.module';
     entities: [],
     synchronize: true,
     autoLoadEntities: true
-  }), TSModule, KOPModule, cargoModule, ProblemsModule, KOCModule, ReceptionModule, statusModule, roleModule],
+  }), TSModule, KOPModule, cargoModule, ProblemsModule, KOCModule, ReceptionModule, statusModule, roleModule, userModule, permissionModule ],
   controllers: [AppController],
   providers: [AppService],
 })
-
-
 
 export class AppModule {}
