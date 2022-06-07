@@ -8,6 +8,8 @@ import { cargoModule } from './modules/Cargo/cargo.module';
 import { KOCModule } from './modules/kindOfCargo/kindOfCargo.module';
 import { ProblemsModule } from './modules/Problems/problems.module';
 import { ReceptionModule } from './modules/Reception/Reception.module';
+import { statusModule } from './modules/Status/status.module';
+import { roleModule } from './modules/Role/role.module';
 
 
 
@@ -22,7 +24,7 @@ import { ReceptionModule } from './modules/Reception/Reception.module';
     entities: [],
     synchronize: true,
     autoLoadEntities: true
-  }), TSModule, KOPModule, cargoModule, ProblemsModule, KOCModule, ReceptionModule],
+  }), TSModule, KOPModule, cargoModule, ProblemsModule, KOCModule, ReceptionModule, statusModule, roleModule],
   controllers: [AppController],
   providers: [AppService],
 })
