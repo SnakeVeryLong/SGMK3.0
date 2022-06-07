@@ -21,7 +21,7 @@ export class KOCController {
   
     @Put(':id')
     update(@Param('id') id: string, @Body() kop: KindOfCargo){
-        return `This action updates a #${id} TS`;
+        return `This action updates a #${id} KOC`;
     }
 
 }

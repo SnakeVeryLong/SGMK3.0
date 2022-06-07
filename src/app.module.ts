@@ -8,6 +8,8 @@ import { cargoModule } from './modules/Cargo/cargo.module';
 import { KindOfCargo } from './modules/kindOfCargo/entity/kindOfCargo.entity';
 import { KindOfProblem } from './modules/kindOfProblem/entity/kindOfProblem';
 import { Problems } from './modules/Problems/entity/problems.entity';
+import { KOCModule } from './modules/kindOfCargo/kindOfCargo.module';
+import { ProblemsModule } from './modules/Problems/problems.module';
 
 
 
@@ -22,7 +24,7 @@ import { Problems } from './modules/Problems/entity/problems.entity';
     entities: [],
     synchronize: true,
     autoLoadEntities: true
-  }), TSModule, KOPModule, cargoModule, KindOfCargo, KindOfProblem, Problems],
+  }), TSModule, KOPModule, cargoModule, ProblemsModule, KOCModule],
   controllers: [AppController],
   providers: [AppService],
 })
