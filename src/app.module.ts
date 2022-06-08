@@ -12,8 +12,7 @@ import { statusModule } from './modules/Status/status.module';
 import { roleModule } from './modules/Role/role.module';
 import { userModule } from './modules/User/user.module';
 import { permissionModule } from './modules/permission/permission.module';
-
-
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -26,9 +25,14 @@ import { permissionModule } from './modules/permission/permission.module';
     entities: [],
     synchronize: true,
     autoLoadEntities: true
-  }), TSModule, KOPModule, cargoModule, ProblemsModule, KOCModule, ReceptionModule, statusModule, roleModule, userModule, permissionModule ],
+}), TSModule, KOPModule, cargoModule, ProblemsModule, KOCModule, ReceptionModule, statusModule, roleModule, userModule, permissionModule ],
   controllers: [AppController],
   providers: [AppService],
 })
 
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource){}
+
+
+
+}
