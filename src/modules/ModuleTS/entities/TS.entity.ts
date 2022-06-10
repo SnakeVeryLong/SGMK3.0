@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, OneToMany } from "typeorm"
+import { type } from "os"
+import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, OneToMany, ManyToMany, ManyToOne } from "typeorm"
+import { Cargo } from "./cargo.entity"
+import { Problems } from "./problems.entity"
 
 @Entity()
 export class TS {
@@ -24,4 +27,9 @@ export class TS {
     @Column({default: Date.now()})
     DateShipment: string
 
+    @OneToMany(type => Cargo, (Cargo) => Cargo.TS, {eager: true, cascade: true})
+    Cargo: Cargo
+
+    @ManyToOne(type => Problems, (Problems) => Problems.TS, {eager:true, cascade:true})
+    problems: Problems[]
 }

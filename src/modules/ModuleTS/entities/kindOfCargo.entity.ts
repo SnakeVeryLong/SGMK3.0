@@ -1,4 +1,6 @@
+import { type } from "os"
 import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, JoinColumn, OneToMany } from "typeorm"
+import { Cargo } from "./cargo.entity"
 
 @Entity()
 export class KindOfCargo {
@@ -9,4 +11,6 @@ export class KindOfCargo {
     @Column()
     Kind: string
 
+    @OneToMany(type => Cargo, (Cargo) => Cargo.kindOfCargo, {eager:true, cascade: true})
+    Cargo: Cargo
 }

@@ -1,4 +1,6 @@
+import { type } from "os"
 import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, OneToMany, JoinColumn, ManyToOne } from "typeorm"
+import { Problems } from "./problems.entity"
 
 
 @Entity()
@@ -13,7 +15,7 @@ export class Reception {
     @Column()
     DateEndReception: string
 
-  /*  @ManyToOne(type => User, (User) => User.reception, {eager: true, cascade: true})
-    user: User*/
+    @ManyToOne(type => Problems, (Problems) => Problems.reception, {eager:true, cascade:true})
+    problems: Problems[]  
     
 }
