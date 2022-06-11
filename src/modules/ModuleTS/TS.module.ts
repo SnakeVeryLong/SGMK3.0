@@ -1,28 +1,25 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { CargoController } from "./Controllers/cargo.controller";
+import { ComplietCargoController } from "./Controllers/ComplietCargo.controller";
+import { NCMPController } from "./Controllers/NotCustomMadeProduct.controller";
+import { ReceptionController } from "./Controllers/Reception.controller";
 import { Cargo } from "./entities/cargo.entity";
 import { KindOfCargo } from "./entities/kindOfCargo.entity";
-import { KindOfCargoService } from "./Services/kind-of-cargo/kind-of-cargo.service";
-import { KOCController } from "./Controllers/kindOfCargo.controller";
 import { KindOfProblem } from "./entities/kindOfProblem.entity";
-import { KindOfProblemService } from "./Services/kind-of-problem/kind-of-problem.service";
-import { KOPController } from "./Controllers/kindOfProblem.controller";
 import { Problems } from "./entities/problems.entity";
-import { ProblemsController } from "./Controllers/problems.controller";
-import { ProblemsService } from "./Services/problems/problems.service";
 import { Reception } from "./entities/Reception.entity";
-import { ReceptionController } from "./Controllers/Reception.controller";
-import { ReceptionService } from "./Services/reception/reception.service";
+
 import { TS } from "./entities/TS.entity";
-import { TSController } from "./Controllers/TS.controller";
-import { TsService } from "./Services/ts/ts.service";
+import { ComplietCargoService } from "./Services/compliet-cargo/compliet-cargo.service";
+import { NcmpService } from "./Services/ncmp/ncmp.service";
+import { ReceptionService } from "./Services/reception/reception.service";
+
 
 @Module({
   imports: [TypeOrmModule.forFeature([TS]), TypeOrmModule.forFeature([Cargo]), TypeOrmModule.forFeature([KindOfCargo]), TypeOrmModule.forFeature([KindOfProblem]), TypeOrmModule.forFeature([Problems]), TypeOrmModule.forFeature([Reception])],
   exports: [TypeOrmModule],
-  controllers: [TSController, ReceptionController, ProblemsController, KOPController, KOCController, CargoController],
-  providers: [TsService, ReceptionService, ProblemsService, KindOfProblemService, KindOfCargoService],
+  controllers: [ComplietCargoController, NCMPController, ReceptionController],
+  providers: [ComplietCargoService, NcmpService, ReceptionService],
 })
 
 export class TSModule {}
