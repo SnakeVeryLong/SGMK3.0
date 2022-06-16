@@ -7,14 +7,9 @@ import { ComplietCargoService } from '../Services/compliet-cargo/compliet-cargo.
 export class ComplietCargoController {
       constructor(private complieteCargo: ComplietCargoService){}
 
-      @Get()
+      @Get('s')
       async findAllTS(): Promise<TS[]> {
           return this.complieteCargo.findAllTS()
-      }
-  
-      @Get()
-      async findAllCargo(): Promise<Cargo[]> {
-          return this.complieteCargo.findAllCargo()
       }
 
       @Post()

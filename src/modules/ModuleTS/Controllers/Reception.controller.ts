@@ -6,7 +6,7 @@ import { ReceptionService } from '../Services/reception/reception.service';
 export class ReceptionController {
        constructor(private receptionService: ReceptionService) {}
 
-       @Get()
+       @Get('Priyom')
        async findAll(): Promise<Reception[]>{
            return this.receptionService.findAll()
        }

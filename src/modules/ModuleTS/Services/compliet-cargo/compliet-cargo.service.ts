@@ -1,18 +1,21 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Cargo } from '../../entities/cargo.entity';
 import { TS } from '../../entities/TS.entity';
 
 @Injectable()
 export class ComplietCargoService {
+    constructor(
+        @InjectRepository (TS)
+        private readonly ts: Repository<TS>
+    ) {}
+
     private readonly cargo: Cargo[] = [];
     private readonly TS: TS[] = [];
 
-    findAllCargo(): Cargo[] {
-        return this.cargo;
-    }
-
-    findAllTS(): TS[] {
-        return this.TS;
+    async findAllTS(): Promise<TS[]> {
+        return this.ts.find({relations: ['Cargo']});
     }
 
     create(cargo: Cargo){

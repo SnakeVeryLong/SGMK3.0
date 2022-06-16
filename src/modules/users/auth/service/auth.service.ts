@@ -12,8 +12,10 @@ export class AuthService {
       //const saltOrRounds = 10;
       const hash = await bcrypt.hash(password, 10 /*saltOrRounds*/);
               const user = await this.userService.findOne(login);
+              console.log(user.Password, hash)
         if (user && user.Password === hash) {
             const { Password, Login, ...rest } = user;
+
             return user;
     }
     return null;

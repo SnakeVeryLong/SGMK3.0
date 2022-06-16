@@ -19,4 +19,11 @@ export class AppController {
   getHello(@Request() req): string {
     return req.user;
   }
+
+  @Get('a')
+  w(){
+    console.log('str', 'oka')
+    return 's'
+  }
+
 }
