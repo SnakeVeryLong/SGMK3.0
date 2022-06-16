@@ -7,7 +7,7 @@ import { NcmpService } from '../Services/ncmp/ncmp.service';
 export class NCMPController {
     constructor(private ncmp: NcmpService) {}
 
-     @Post()
+     @Post('custom')
      async create (@Body() createNCMP: Problems){
          this.ncmp.create(createNCMP);
      }

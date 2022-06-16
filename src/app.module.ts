@@ -10,6 +10,8 @@ import { UserService } from './modules/users/service/user/user.service';
 import { AController } from './.controller';
 import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { HttpModule } from '@nestjs/axios';
+import { HttpConfigService } from './httpConfigService';
 
 
 @Module({
@@ -23,7 +25,11 @@ import { JwtService } from '@nestjs/jwt';
     entities: [],
     synchronize: true,
     autoLoadEntities: true
-}), TSModule, UsersModule, AuthModule, ConfigModule.forRoot({ isGlobal: true })],
+}), TSModule, UsersModule, AuthModule, 
+HttpModule.registerAsync
+({
+  useClass: HttpConfigService,
+}), ConfigModule.forRoot({ isGlobal: true })],
   controllers: [AppController, AController],
   providers: [AppService, UserService, AuthService, JwtService],
 })

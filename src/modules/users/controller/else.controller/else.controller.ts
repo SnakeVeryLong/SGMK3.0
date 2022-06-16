@@ -9,7 +9,7 @@ import { RoleService } from 'src/modules/users/service/role/role.service';
 export class ElseController {
     constructor(private firmService: FirmService, private role: RoleService){}
 
-    @Get()
+    @Get('fir')
     async findAllFirm(): Promise<Firm[]>{
         return this.firmService.findAllFirm()
     }
@@ -19,7 +19,7 @@ export class ElseController {
         this.firmService.createFirm(createFirm);
     }
     
-    @Get()
+    @Get('rol')
     async findAllRole(): Promise<Role[]> {
         return this.role.findAllRole()
     }

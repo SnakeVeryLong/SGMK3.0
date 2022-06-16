@@ -6,7 +6,7 @@ import { PermissionService } from 'src/modules/users/service/permission/permissi
 export class PermissionController {
     constructor(private permissionService: PermissionService) {}
 
-       @Get()
+       @Get('per')
        async findAllPermission(): Promise<Permission[]>{
            return this.permissionService.findAllPermission()
        }
