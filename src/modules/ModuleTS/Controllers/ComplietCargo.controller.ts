@@ -13,7 +13,13 @@ export class ComplietCargoController {
       }
 
       @Post()
-      async Create(@Body() createCargo: Cargo){
-          this.complieteCargo.create(createCargo);
+      async CreateCargo(@Body() createCargo: Cargo){
+          this.complieteCargo.createCargo(createCargo);
+         
+      }
+
+      @Post()
+      async CreateTS(@Body() createTS: TS){
+          this.complieteCargo.createTS(createTS);
       }
 }

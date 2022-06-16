@@ -8,14 +8,14 @@ import { Reception } from '../../entities/Reception.entity';
 export class ReceptionService {
     constructor(
     @InjectRepository(Reception)
-    private readonly recep: Repository<Reception>, 
+    private readonly receptionRepository: Repository<Reception>, 
     ){}
-    private readonly reception: Reception[] = [];
+    private readonly reception: Array<Reception> = [];
 
     async findAll(): Promise<Reception[]>{
-        return this.recep.find({loadEagerRelations: true});
+        return this.receptionRepository.find({loadEagerRelations: true});
     }
 
-    
+   
 
 }

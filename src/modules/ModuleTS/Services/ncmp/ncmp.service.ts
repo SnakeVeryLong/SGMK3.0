@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Problems } from '../../entities/problems.entity';
 
 @Injectable()
 export class NcmpService {
     constructor(
         @InjectRepository(Problems)
-        private prob: Repository<Problems>
+        private problemRepository: Repository<Problems>,
+        private dataSource: DataSource
     ){}
-    private readonly problems: Problems[] = [];
+    private readonly problem: Array<Problems> = [];
 
    async create(problems: Problems): Promise<void>{
-        await this.prob.create(problems);
+        await this.problemRepository.create(problems);
     }
+
+   
 }
