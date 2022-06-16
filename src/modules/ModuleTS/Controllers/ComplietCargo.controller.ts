@@ -12,13 +12,13 @@ export class ComplietCargoController {
           return this.complieteCargo.findAllTS()
       }
 
-      @Post()
+      @Post('cargo')
       async CreateCargo(@Body() createCargo: Cargo){
           this.complieteCargo.createCargo(createCargo);
          
       }
 
-      @Post()
+      @Post('TS')
       async CreateTS(@Body() createTS: TS){
           this.complieteCargo.createTS(createTS);
       }

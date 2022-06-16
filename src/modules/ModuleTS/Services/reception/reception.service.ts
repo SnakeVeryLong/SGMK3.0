@@ -15,7 +15,4 @@ export class ReceptionService {
     async findAll(): Promise<Reception[]>{
         return this.receptionRepository.find({loadEagerRelations: true});
     }
-
-   
-
 }

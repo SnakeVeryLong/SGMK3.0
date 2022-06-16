@@ -8,12 +8,12 @@ export class NcmpService {
     constructor(
         @InjectRepository(Problems)
         private problemRepository: Repository<Problems>,
-        private dataSource: DataSource
     ){}
     private readonly problem: Array<Problems> = [];
 
    async create(problems: Problems): Promise<void>{
         await this.problemRepository.create(problems);
+        await this.problemRepository.save(problems);
     }
 
    

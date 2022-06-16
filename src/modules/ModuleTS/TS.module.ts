@@ -8,7 +8,6 @@ import { KindOfCargo } from "./entities/kindOfCargo.entity";
 import { KindOfProblem } from "./entities/kindOfProblem.entity";
 import { Problems } from "./entities/problems.entity";
 import { Reception } from "./entities/Reception.entity";
-
 import { TS } from "./entities/TS.entity";
 import { ComplietCargoService } from "./Services/compliet-cargo/compliet-cargo.service";
 import { NcmpService } from "./Services/ncmp/ncmp.service";

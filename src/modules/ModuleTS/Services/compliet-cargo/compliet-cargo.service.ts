@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Cargo } from '../../entities/cargo.entity';
 import { TS } from '../../entities/TS.entity';
 
@@ -9,7 +9,8 @@ export class ComplietCargoService {
     constructor(
         @InjectRepository (TS)
         private readonly tsRep: Repository<TS>,
-        private dataSource: DataSource
+        @InjectRepository(Cargo)
+        private readonly cargoRep: Repository<Cargo>,
     ) {}
 
     private readonly cargo: Array<Cargo> = [];
@@ -19,12 +20,15 @@ export class ComplietCargoService {
         return this.tsRep.find({relations: ['Cargo']});
     }
 
-  async  createCargo(cargo: Cargo): Promise<void>{
-       await this.cargo.push(cargo);
+  async  createCargo(cargo: Cargo): Promise<Cargo>{
+       const CargoC = this.cargoRep.create(cargo);
+       return this.cargoRep.save(CargoC);
     }
 
-    async createTS(ts: TS): Promise<void>{
-        await this.ts.push(ts);
+    async createTS(ts: TS): Promise<TS>{
+       const tsc = this.tsRep.create(ts);
+       return this.tsRep.save(tsc)
+
     }
 
 }
