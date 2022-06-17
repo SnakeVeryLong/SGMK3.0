@@ -12,8 +12,8 @@ export class NcmpService {
     private readonly problem: Array<Problems> = [];
 
    async create(problems: Problems): Promise<void>{
-        await this.problemRepository.create(problems);
-        await this.problemRepository.save(problems);
+        const probl = this.problemRepository.create(problems);
+        await this.problemRepository.save(probl);
     }
 
    

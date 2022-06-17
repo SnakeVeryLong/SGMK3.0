@@ -9,7 +9,7 @@ export class KindOfCargo {
     idKindOfCargo: number
 
     @Column()
-    Kind: string
+    kind: string
 
     @OneToMany(type => Cargo, (Cargo) => Cargo.kindOfCargo, {eager:true, cascade: true})
     Cargo: Cargo

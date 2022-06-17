@@ -10,6 +10,7 @@ export class ReceptionService {
     @InjectRepository(Reception)
     private readonly receptionRepository: Repository<Reception>, 
     ){}
+    
     private readonly reception: Array<Reception> = [];
 
     async findAll(): Promise<Reception[]>{

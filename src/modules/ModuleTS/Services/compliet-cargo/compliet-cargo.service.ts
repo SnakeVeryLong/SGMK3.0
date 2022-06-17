@@ -1,34 +1,49 @@
+import { any } from '@hapi/joi';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cargo } from '../../entities/cargo.entity';
-import { TS } from '../../entities/TS.entity';
+import { Problems } from '../../entities/problems.entity';
+import { transport } from '../../entities/TS.entity';
 
 @Injectable()
 export class ComplietCargoService {
     constructor(
-        @InjectRepository (TS)
-        private readonly tsRep: Repository<TS>,
+        @InjectRepository (transport)
+        private readonly transportRepository: Repository<transport>,
         @InjectRepository(Cargo)
-        private readonly cargoRep: Repository<Cargo>,
+        private readonly cargoRepository: Repository<Cargo>,
     ) {}
 
     private readonly cargo: Array<Cargo> = [];
-    private readonly ts: Array<TS> = [];
+    private  ts: Array<transport> = [];
 
-    async findAllTS(): Promise<TS[]> {
-        return this.tsRep.find({relations: ['Cargo']});
+    async findAllTS(): Promise<transport[]> {
+        return this.transportRepository.find({relations: ['Cargo']});
     }
 
-  async  createCargo(cargo: Cargo): Promise<Cargo>{
-       const CargoC = this.cargoRep.create(cargo);
-       return this.cargoRep.save(CargoC);
+  async  createCargo(cargo: Array<Cargo>): Promise<void>{
+       const CargoC = this.cargoRepository.create(cargo);
+       
+       console.log(CargoC)
+       await this.cargoRepository.save(CargoC);
     }
 
-    async createTS(ts: TS): Promise<TS>{
-       const tsc = this.tsRep.create(ts);
-       return this.tsRep.save(tsc)
-
+    async createTS(tsp: Array<transport>, Cargo: Cargo, problems: Problems[]): Promise<void>{
+       const tsc = this.transportRepository.create(tsp)
+       let tss = new transport()
+       tss = { 
+           numberTS: "23er3",
+           numderDocument: "23r34",
+           date: "22.06.99",
+           massaFirst: "223,4",
+           dateArrival: "22.06.99",
+           dateShipment: "22.06.99"
+    }
+       tsc[1] = tss
+       tsc[2] = tss
+       console.log(tsc)
+       await this.transportRepository.save(tsc)
     }
 
 }

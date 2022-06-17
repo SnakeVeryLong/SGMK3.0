@@ -1,35 +1,35 @@
 import { type } from "os"
-import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, OneToMany, ManyToMany, ManyToOne } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm"
 import { Cargo } from "./cargo.entity"
 import { Problems } from "./problems.entity"
 
 @Entity()
-export class TS {
+export class transport {
 
-    @PrimaryGeneratedColumn()
-    idForTS: number
-
-    @Column()
-    NumberTS: string
+    @PrimaryGeneratedColumn('uuid')
+    id: string
 
     @Column()
-    NumberOfDoc: string
+    numberTS: string
+
+    @Column()
+    numderDocument: string
 
     @Column({default: Date.now()})
-    Date: string
+    date: string
     
     @Column()
     massaFirst: string
 
     @Column({default: Date.now()})
-    DateArrival: string
+    dateArrival: string
 
     @Column({default: Date.now()})
-    DateShipment: string
+    dateShipment: string
 
     @OneToMany(type => Cargo, (Cargo) => Cargo.TS, {eager: true, cascade: true})
-    Cargo: Cargo
+    cargo: Cargo
 
-    @ManyToOne(type => Problems, (Problems) => Problems.TS, {eager:true, cascade:true})
+    @ManyToOne(type => Problems, (Problems) => Problems.ts, {eager:true, cascade:true})
     problems: Problems[]
 }

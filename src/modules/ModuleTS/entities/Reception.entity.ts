@@ -7,13 +7,13 @@ import { Problems } from "./problems.entity"
 export class Reception {
 
     @PrimaryGeneratedColumn()
-    idForReception: number
+    id: number
 
     @Column()
-    DateStartReception: string
+    dateStartReception: string
 
     @Column()
-    DateEndReception: string
+    dateEndReception: string
 
     @ManyToOne(type => Problems, (Problems) => Problems.reception, {eager:true, cascade:true})
     problems: Problems[]  
