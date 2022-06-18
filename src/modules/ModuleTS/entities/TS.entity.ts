@@ -6,8 +6,8 @@ import { Problems } from "./problems.entity"
 @Entity()
 export class transport {
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+    @PrimaryGeneratedColumn()
+    id: number
 
     @Column()
     numberTS: string

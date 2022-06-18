@@ -30,18 +30,19 @@ export class ComplietCargoService {
     }
 
     async createTS(tsp: Array<transport>, Cargo: Cargo, problems: Problems[]): Promise<void>{
-       const tsc = this.transportRepository.create(tsp)
        let tss = new transport()
-       tss = { 
-           numberTS: "23er3",
-           numderDocument: "23r34",
-           date: "22.06.99",
-           massaFirst: "223,4",
-           dateArrival: "22.06.99",
-           dateShipment: "22.06.99"
-    }
-       tsc[1] = tss
-       tsc[2] = tss
+        tss = { 
+            id: 2,
+            numberTS: "23er3",
+            numderDocument: "23r34",
+            date: "22.06.99",
+            massaFirst: "223,4",
+            dateArrival: "22.06.99",
+            dateShipment: "22.06.99",
+            cargo: Cargo,
+            problems: problems
+        }
+       const tsc = this.transportRepository.create(tss)      
        console.log(tsc)
        await this.transportRepository.save(tsc)
     }

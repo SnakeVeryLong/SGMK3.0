@@ -22,4 +22,5 @@ export class ComplietCargoController {
       async CreateTS(@Body() createTS: Array<transport>, cargo: Cargo, pro: Problems[]){
           this.complieteCargo.createTS(createTS, cargo, pro);
       }
+      
 }

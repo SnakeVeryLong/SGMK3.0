@@ -21,5 +21,6 @@ import { ReceptionService } from "./Services/reception/reception.service";
   providers: [ComplietCargoService, NcmpService, ReceptionService],
 })
 
+
 export class TSModule {}
 
