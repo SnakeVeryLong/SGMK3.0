@@ -1,17 +1,18 @@
-import { type } from "os"
-import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, OneToMany, JoinColumn } from "typeorm"
-import { Problems } from "./problems.entity"
-
+import { type } from 'os';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Problem } from './problems.entity';
 
 @Entity()
-export class KindOfProblem {
+export class ProblemType {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    idForKindOfProblem: number
+  @Column()
+  code: string;
 
-    @Column()
-    kind: string
-
-    @OneToMany(type => Problems, (Problems) => Problems.kindOfProblems, {eager:true, cascade:true})
-    problems: Problems
+  @OneToMany(() => Problem, (problem) => problem.problemType, {
+    eager: true,
+    cascade: true,
+  })
+  problem: Problem;
 }

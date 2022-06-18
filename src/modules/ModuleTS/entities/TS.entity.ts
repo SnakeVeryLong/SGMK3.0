@@ -1,35 +1,45 @@
-import { type } from "os"
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm"
-import { Cargo } from "./cargo.entity"
-import { Problems } from "./problems.entity"
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
+import { Cargo } from './cargo.entity';
+import { Problem } from './problems.entity';
 
 @Entity()
-export class transport {
+export class Transport {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number
+  @Column()
+  transportNumber: string;
 
-    @Column()
-    numberTS: string
+  @Column()
+  documentNumber: string;
 
-    @Column()
-    numderDocument: string
+  @Column({ default: Date.now() })
+  date: Date;
 
-    @Column({default: Date.now()})
-    date: string
-    
-    @Column()
-    massaFirst: string
+  @Column()
+  massaFirst: string;
 
-    @Column({default: Date.now()})
-    dateArrival: string
+  @Column({ default: Date.now() })
+  arrivalDate: string;
 
-    @Column({default: Date.now()})
-    dateShipment: string
+  @Column({ default: Date.now() })
+  shipmentDate: string;
 
-    @OneToMany(type => Cargo, (Cargo) => Cargo.TS, {eager: true, cascade: true})
-    cargo: Cargo
+  @OneToMany(() => Cargo, (Cargo) => Cargo.transport, {
+    eager: true,
+    cascade: true,
+  })
+  cargo: Cargo;
 
-    @ManyToOne(type => Problems, (Problems) => Problems.ts, {eager:true, cascade:true})
-    problems: Problems[]
+  @ManyToOne(() => Problem, (problem) => problem.ts, {
+    eager: true,
+    cascade: true,
+  })
+  problem: Problem[];
 }

@@ -1,33 +1,37 @@
-import { type } from "os"
-import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, Double, OneToMany, ManyToOne } from "typeorm"
-import { KindOfProblem } from "./kindOfProblem.entity"
-import { Reception } from "./Reception.entity"
-import { transport } from "./TS.entity"
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+} from 'typeorm';
+import { ProblemType } from './kindOfProblem.entity';
+import { Reception } from './Reception.entity';
+import { Transport } from './TS.entity';
 
 @Entity()
-export class Problems {
+export class Problem {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    idForProblems: number
+  @Column()
+  photo: string;
 
-    @Column()
-    photo: string
+  @Column()
+  comment: string;
 
-    @Column()
-    comment: string
+  @Column()
+  weight: number;
 
-    @Column()
-    massa: number
+  @Column()
+  status: string;
 
-    @Column()
-    status: string
+  @OneToMany(() => Reception, (Reception) => Reception.problem)
+  reception: Reception;
 
-    @OneToMany(type => Reception, (Reception) => Reception.problems)
-    reception: Reception
+  @OneToMany(() => Transport, (TS) => TS.problem)
+  ts: Transport;
 
-    @OneToMany(type => transport, (TS) => TS.problems)
-    ts: transport
-
-    @ManyToOne(type => KindOfProblem, (KindOfProblem) => KindOfProblem.problems)
-    kindOfProblems: KindOfProblem[]
+  @ManyToOne(() => ProblemType, (problemType) => problemType.problem)
+  problemType: ProblemType[];
 }

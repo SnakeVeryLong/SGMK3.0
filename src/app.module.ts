@@ -20,7 +20,7 @@ import { HttpConfigService } from './httpConfigService';
     host: 'localhost',
     port: 5432,
     username: 'postgres',
-    password: '12345',
+    password: 'rfcdfhju]9',
     database: 'test1',
     entities: [],
     synchronize: true,

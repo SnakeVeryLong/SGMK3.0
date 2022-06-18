@@ -1,26 +1,25 @@
-import { type } from "os"
-import { Entity, PrimaryGeneratedColumn, Column, TableForeignKey, Double, OneToMany, JoinColumn, ManyToOne } from "typeorm"
-import { KindOfCargo } from "./kindOfCargo.entity"
-import { transport } from "./TS.entity"
+import { type } from 'os';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { CargoType } from './kindOfCargo.entity';
+import { Transport } from './TS.entity';
 
 @Entity()
 export class Cargo {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    idCargo: number
+  @Column()
+  massaBefor: number;
 
-    @Column()
-    massaBefor: number
+  @Column()
+  massaAfter: number;
 
-    @Column()
-    massaAfter: number
+  @Column()
+  status: string;
 
-    @Column()
-    Status: string
+  @ManyToOne(() => CargoType, (cargoType) => cargoType.cargo)
+  cargoType: CargoType[];
 
-    @ManyToOne(type => KindOfCargo, (KindOfCargo) => KindOfCargo.Cargo)
-    kindOfCargo: KindOfCargo[]    
-
-    @ManyToOne(type => transport, (TS) => TS.cargo)
-    TS: transport[]
+  @ManyToOne(() => Transport, (TS) => TS.cargo)
+  transport: Transport[];
 }
