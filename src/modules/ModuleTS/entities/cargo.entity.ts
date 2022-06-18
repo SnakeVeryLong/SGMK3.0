@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { CargoType } from './cargoType.entity';
 import { Transport } from './tranport.entity';
@@ -9,10 +8,10 @@ export class Cargo {
   id: number;
 
   @Column()
-  massaBefor: number;
+  weightBefor: number;
 
   @Column()
-  massaAfter: number;
+  weightAfter: number;
 
   @Column()
   status: string;

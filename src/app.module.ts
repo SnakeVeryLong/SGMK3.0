@@ -22,7 +22,7 @@ import { HttpConfigService } from './httpConfigService';
       username: 'postgres',
       password: 'rfcdfhju]9',
       database: 'test1',
-      entities: [],
+      entities: ['*.entity.ts'],
       synchronize: true,
       autoLoadEntities: true,
     }),

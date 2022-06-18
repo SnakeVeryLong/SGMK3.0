@@ -6,11 +6,11 @@ export class Reception {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  dateStartReception: string;
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
+  startAt: Date;
 
   @Column()
-  dateEndReception: string;
+  endAt: Date;
 
   @ManyToOne(() => Problem, (problem) => problem.reception, {
     eager: true,

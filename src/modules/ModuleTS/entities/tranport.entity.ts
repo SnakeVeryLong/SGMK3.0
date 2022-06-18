@@ -19,17 +19,17 @@ export class Transport {
   @Column()
   documentNumber: string;
 
-  @Column({ default: Date.now() })
+  @Column()
   date: Date;
 
   @Column()
-  massaFirst: string;
+  weightFirst: string;
 
-  @Column({ default: Date.now() })
-  arrivalDate: string;
+  @Column()
+  arrivalDate: Date;
 
-  @Column({ default: Date.now() })
-  shipmentDate: string;
+  @Column()
+  shipmentDate: Date;
 
   @OneToMany(() => Cargo, (Cargo) => Cargo.transport, {
     eager: true,

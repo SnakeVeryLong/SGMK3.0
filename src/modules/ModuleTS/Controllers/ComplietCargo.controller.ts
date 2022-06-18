@@ -1,26 +1,29 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, Put, Query, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Cargo } from '../entities/cargo.entity';
-import { Problems } from '../entities/problems.entity';
-import { transport } from '../entities/tranport.entity';
+import { Problem } from '../entities/problems.entity';
+import { Transport } from '../entities/tranport.entity';
 import { ComplietCargoService } from '../Services/compliet-cargo/compliet-cargo.service';
 
 @Controller()
 export class ComplietCargoController {
-      constructor(private complieteCargo: ComplietCargoService){}
+  constructor(private complieteCargo: ComplietCargoService) {}
 
-      @Get('s')
-      async findAllTS(): Promise<transport[]> {
-          return this.complieteCargo.findAllTS()
-      }
+  @Get('s')
+  async findAllTS(): Promise<Transport[]> {
+    return this.complieteCargo.findAllTS();
+  }
 
-      @Post('cargo')
-      async CreateCargo(@Body() createCargo: Cargo[]){
-          this.complieteCargo.createCargo(createCargo);     
-      }
+  @Post('cargo')
+  async CreateCargo(@Body() createCargo: Cargo[]) {
+    this.complieteCargo.createCargo(createCargo);
+  }
 
-      @Post('TS')
-      async CreateTS(@Body() createTS: Array<transport>, cargo: Cargo, pro: Problems[]){
-          this.complieteCargo.createTS(createTS, cargo, pro);
-      }
-      
+  @Post('TS')
+  async CreateTS(
+    @Body() createTS: Array<Transport>,
+    cargo: Cargo,
+    pro: Problem[],
+  ) {
+    this.complieteCargo.createTS(createTS, cargo, pro);
+  }
 }
