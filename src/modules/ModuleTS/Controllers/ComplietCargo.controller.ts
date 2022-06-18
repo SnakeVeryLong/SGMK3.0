@@ -8,7 +8,7 @@ import { ComplietCargoService } from '../Services/compliet-cargo/compliet-cargo.
 export class ComplietCargoController {
       constructor(private complieteCargo: ComplietCargoService){}
 
-      @Get('s')
+      @Get('GetTS')
       async findAllTS(): Promise<transport[]> {
           return this.complieteCargo.findAllTS()
       }
@@ -22,5 +22,5 @@ export class ComplietCargoController {
       async CreateTS(@Body() createTS: Array<transport>, cargo: Cargo, pro: Problems[]){
           this.complieteCargo.createTS(createTS, cargo, pro);
       }
-      
+
 }

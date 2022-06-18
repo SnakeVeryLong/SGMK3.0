@@ -1,6 +1,9 @@
 import { any } from '@hapi/joi';
+import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { AxiosResponse } from 'axios';
+import { Observable } from 'rxjs';
 import { Repository } from 'typeorm';
 import { Cargo } from '../../entities/cargo.entity';
 import { Problems } from '../../entities/problems.entity';
@@ -13,6 +16,7 @@ export class ComplietCargoService {
         private readonly transportRepository: Repository<transport>,
         @InjectRepository(Cargo)
         private readonly cargoRepository: Repository<Cargo>,
+        private readonly httpService: HttpService
     ) {}
 
     private readonly cargo: Array<Cargo> = [];
@@ -24,7 +28,6 @@ export class ComplietCargoService {
 
   async  createCargo(cargo: Array<Cargo>): Promise<void>{
        const CargoC = this.cargoRepository.create(cargo);
-       
        console.log(CargoC)
        await this.cargoRepository.save(CargoC);
     }
@@ -45,6 +48,18 @@ export class ComplietCargoService {
        const tsc = this.transportRepository.create(tss)      
        console.log(tsc)
        await this.transportRepository.save(tsc)
+    }
+
+    postAllHttpTS(): Observable<AxiosResponse<transport[]>>{
+        return this.httpService.post('http://localhost:3000/TS')
+    }
+
+    postAllHttpCargo(): Observable<AxiosResponse<Cargo[]>>{
+        return this.httpService.post('http://localhost:3000/cargo')
+    }
+
+    findAll(): Observable<AxiosResponse<transport[]>>{
+        return this.httpService.get('http://localhost:3000/GetTS')
     }
 
 }
