@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cargo } from '../../entities/cargo.entity';
@@ -14,9 +14,6 @@ export class ComplietCargoService {
     private readonly cargoRepository: Repository<Cargo>,
   ) {}
 
-  private readonly cargo: Array<Cargo> = [];
-  private ts: Array<Transport> = [];
-
   async findAllTS(): Promise<Transport[]> {
     return this.transportRepository.find({ relations: ['Cargo'] });
   }
@@ -28,11 +25,25 @@ export class ComplietCargoService {
     await this.cargoRepository.save(CargoC);
   }
 
-  async createTS(
-    tsp: Array<Transport>,
-    Cargo: Cargo,
-    problems: Problem[],
-  ): Promise<void> {
+  /**
+   * Метод сохранения для ТС
+   * @param transport - добавляемые ТС
+   */
+  async addTransport(transport: Array<Transport>): Promise<Transport[]> {
+    try {
+      const savedTrapsort = await this.transportRepository.save(transport);
+      return savedTrapsort;
+    } catch (e) {
+      Logger.error(
+        'Ошибка сохранения ТС',
+        e,
+        'compliet-cargo.service.ts::addTransport',
+      );
+      throw new BadRequestException('Ошибка сохранения ТС');
+    }
+  }
+
+  async createTS(): Promise<void> {
     const tss = new Transport();
 
     const tsc = this.transportRepository.create(tss);
