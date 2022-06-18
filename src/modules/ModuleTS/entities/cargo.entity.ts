@@ -1,7 +1,7 @@
 import { type } from 'os';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { CargoType } from './kindOfCargo.entity';
-import { Transport } from './TS.entity';
+import { CargoType } from './cargoType.entity';
+import { Transport } from './tranport.entity';
 
 @Entity()
 export class Cargo {

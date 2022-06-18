@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Problem } from './problems.entity';
 

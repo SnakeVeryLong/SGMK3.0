@@ -5,9 +5,9 @@ import {
   OneToMany,
   ManyToOne,
 } from 'typeorm';
-import { ProblemType } from './kindOfProblem.entity';
+import { ProblemType } from './problemType.entity';
 import { Reception } from './Reception.entity';
-import { Transport } from './TS.entity';
+import { Transport } from './tranport.entity';
 
 @Entity()
 export class Problem {

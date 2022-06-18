@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cargo } from '../../entities/cargo.entity';
 import { Problems } from '../../entities/problems.entity';
-import { transport } from '../../entities/TS.entity';
+import { transport } from '../../entities/tranport.entity';
 
 @Injectable()
 export class ComplietCargoService {

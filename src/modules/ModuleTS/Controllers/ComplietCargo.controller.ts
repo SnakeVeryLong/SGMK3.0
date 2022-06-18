@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpStatus, Param, Post, Put, Query, Req, Res } from '@nestjs/common';
 import { Cargo } from '../entities/cargo.entity';
 import { Problems } from '../entities/problems.entity';
-import { transport } from '../entities/TS.entity';
+import { transport } from '../entities/tranport.entity';
 import { ComplietCargoService } from '../Services/compliet-cargo/compliet-cargo.service';
 
 @Controller()

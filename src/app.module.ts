@@ -13,29 +13,28 @@ import { JwtService } from '@nestjs/jwt';
 import { HttpModule } from '@nestjs/axios';
 import { HttpConfigService } from './httpConfigService';
 
-
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: 'rfcdfhju]9',
-    database: 'test1',
-    entities: [],
-    synchronize: true,
-    autoLoadEntities: true
-}), TSModule, UsersModule, AuthModule, 
-HttpModule.registerAsync
-({
-  useClass: HttpConfigService,
-}), ConfigModule.forRoot({ isGlobal: true })],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: 'rfcdfhju]9',
+      database: 'test1',
+      entities: [],
+      synchronize: true,
+      autoLoadEntities: true,
+    }),
+    TSModule,
+    UsersModule,
+    AuthModule,
+    HttpModule.registerAsync({
+      useClass: HttpConfigService,
+    }),
+    ConfigModule.forRoot({ isGlobal: true }),
+  ],
   controllers: [AppController, AController],
   providers: [AppService, UserService, AuthService, JwtService],
 })
-
 export class AppModule {}
-
-
-
-
