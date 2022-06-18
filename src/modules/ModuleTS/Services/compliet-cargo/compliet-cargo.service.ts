@@ -30,8 +30,31 @@ export class ComplietCargoService {
    * @param transport - добавляемые ТС
    */
   async addTransport(transport: Array<Transport>): Promise<Transport[]> {
+    const getKey = (ts: Transport) =>
+      `${ts.transportNumber}_${ts.documentNumber}_${ts.shipmentDate.getTime()}`;
     try {
-      const savedTrapsort = await this.transportRepository.save(transport);
+      // Проверяем на дубли перед сохранением (номер ТС, номер накладной, дата отгрузки)
+      const douple = await this.transportRepository.find({
+        where: transport.map((item) => {
+          return {
+            transportNumber: item.transportNumber,
+            documentNumber: item.documentNumber,
+            shipmentDate: item.shipmentDate,
+          };
+        }),
+      });
+
+      const doupleFilter = new Set<string>(douple.map((item) => getKey(item)));
+      const filteredTransport = transport.filter(
+        (item) => !doupleFilter.has(getKey(item)),
+      );
+
+      if (!filteredTransport.length) return [];
+
+      // сохранение отфильтрованных ТС
+      const savedTrapsort = await this.transportRepository.save(
+        filteredTransport,
+      );
       return savedTrapsort;
     } catch (e) {
       Logger.error(
