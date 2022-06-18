@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CreateTransportDto } from '../dto/createTransport.dto';
+import { convert, CreateTransportDto } from '../dto/createTransport.dto';
 import { Cargo } from '../entities/cargo.entity';
 import { Problem } from '../entities/problems.entity';
 import { Transport } from '../entities/tranport.entity';
 import { ComplietCargoService } from '../Services/compliet-cargo/compliet-cargo.service';
 
-@Controller()
+@Controller('compliet-cargo')
 export class ComplietCargoController {
   constructor(private complieteCargoService: ComplietCargoService) {}
 
@@ -19,12 +19,16 @@ export class ComplietCargoController {
     this.complieteCargoService.createCargo(createCargo);
   }
 
+  /**
+   * API для загрузки ТС
+   */
   @Post('loadTs')
-  async loadTransport(@Body() transport: Array<CreateTransportDto>) {
-    return this.complieteCargoService.addTransport(
-      transport.map((item) => item.convert()),
-    );
+  async loadTransport(
+    @Body() transport: Array<CreateTransportDto>,
+  ): Promise<Array<Transport>> {
+    return this.complieteCargoService.addTransport(convert(transport));
   }
+
   @Post('TS')
   async CreateTS(
     @Body() createTS: Array<Transport>,

@@ -12,9 +12,16 @@ export class CreateTransportDto {
   arrivalDate: Date;
 
   shipmentDate: Date;
+}
 
-  public convert(): Transport {
-    const transport = new Transport();
-    Object.assign(transport, { ...this });
-  }
+export function convert(dto: Array<CreateTransportDto>): Array<Transport> {
+  return dto.map((item) => {
+    const tmp = new Transport();
+    Object.assign(tmp, item);
+    tmp.arrivalDate = new Date(item.arrivalDate);
+    tmp.date = new Date(item.date);
+    tmp.shipmentDate = new Date(item.shipmentDate);
+    tmp.weightFirst = Number(item.weightFirst);
+    return tmp;
+  });
 }

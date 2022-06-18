@@ -22,8 +22,8 @@ export class Transport {
   @Column()
   date: Date;
 
-  @Column()
-  weightFirst: string;
+  @Column({ type: 'double precision' })
+  weightFirst: number;
 
   @Column()
   arrivalDate: Date;
