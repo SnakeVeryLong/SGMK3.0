@@ -10,20 +10,17 @@ export class Permission {
     idPermission: number
 
     @ManyToMany(() => User, ( user) =>  user.permission, {
-        cascade: true,
+        cascade: true, eager: true
     })
-    @JoinTable()
     user: User[]
 
     @ManyToMany(() => Role, (role) => role.permission, {
-        cascade: true,
+        cascade: true, eager: true
     })
-    @JoinTable()
     role: Role[]
 
     @ManyToMany(() => Firm, (firm) => firm.permission, {
-        cascade: true,
+        cascade: true, eager: true
     })
-    @JoinTable()
     firm: Firm[]
 }

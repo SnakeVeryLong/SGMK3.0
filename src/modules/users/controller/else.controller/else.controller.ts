@@ -24,8 +24,4 @@ export class ElseController {
         return this.role.findAllRole()
     }
 
-    @Post()
-    async createRole(@Body() createRole: Role){
-        this.role.createRole(createRole);
-    }
 }

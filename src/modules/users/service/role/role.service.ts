@@ -1,16 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from 'src/modules/users/entity/role.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class RoleService {
+    constructor(@InjectRepository(Role)
+    private readonly roleRepository: Repository<Role>,
+    ){}
     private readonly role: Role[]=[];
 
-    findAllRole(): Role[] {
-        return this.role;
+    async findAllRole(): Promise<Role[]> {
+        return this.roleRepository.find({loadEagerRelations: true});
     }
     
-    createRole(role: Role){
-        this.role.push(role);
-    }
+
 
 }
