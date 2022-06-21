@@ -20,7 +20,7 @@ import { HttpConfigService } from './httpConfigService';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: 'rfcdfhju]9',
+      password: '12345',
       database: 'test1',
       entities: ['*.entity.ts'],
       synchronize: true,
@@ -30,7 +30,7 @@ import { HttpConfigService } from './httpConfigService';
     UsersModule,
     AuthModule,
     HttpModule.registerAsync({
-      useClass: HttpConfigService,
+      useClass: HttpConfigService
     }),
     ConfigModule.forRoot({ isGlobal: true }),
   ],

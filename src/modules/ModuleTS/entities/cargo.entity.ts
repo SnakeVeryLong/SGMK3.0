@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { CargoType } from './cargoType.entity';
-import { Transport } from './tranport.entity';
+import { Transport } from './transport.entity';
 
 @Entity()
 export class Cargo {

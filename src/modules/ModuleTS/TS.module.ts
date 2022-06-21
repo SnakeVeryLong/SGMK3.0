@@ -8,10 +8,12 @@ import { CargoType } from './entities/cargoType.entity';
 import { ProblemType } from './entities/problemType.entity';
 import { Problem } from './entities/problems.entity';
 import { Reception } from './entities/Reception.entity';
-import { Transport } from './entities/tranport.entity';
+import { Transport } from './entities/transport.entity';
 import { ComplietCargoService } from './Services/compliet-cargo/compliet-cargo.service';
 import { NcmpService } from './Services/ncmp/ncmp.service';
 import { ReceptionService } from './Services/reception/reception.service';
+import { HttpModule } from '@nestjs/axios';
+import { HttpConfigService } from 'src/httpConfigService';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { ReceptionService } from './Services/reception/reception.service';
       Problem,
       Reception,
     ]),
+   
   ],
   exports: [TypeOrmModule],
   controllers: [ComplietCargoController, NCMPController, ReceptionController],

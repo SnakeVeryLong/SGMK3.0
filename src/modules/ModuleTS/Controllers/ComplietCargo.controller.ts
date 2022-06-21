@@ -1,22 +1,24 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { convert, CreateTransportDto } from '../dto/createTransport.dto';
+import { convertCargo, CreateCargoDTO } from '../dto/createCargo.dto';
+import { convertTS, CreateTransportDto } from '../dto/createTransport.dto';
 import { Cargo } from '../entities/cargo.entity';
-import { Problem } from '../entities/problems.entity';
-import { Transport } from '../entities/tranport.entity';
+import { Transport } from '../entities/transport.entity';
 import { ComplietCargoService } from '../Services/compliet-cargo/compliet-cargo.service';
 
 @Controller('compliet-cargo')
 export class ComplietCargoController {
   constructor(private complieteCargoService: ComplietCargoService) {}
 
-  @Get('s')
-  async findAllTS(): Promise<Transport[]> {
+  @Get('TS')
+  async findAllTS(): Promise<Array<Transport>> {
     return this.complieteCargoService.findAllTS();
   }
 
   @Post('cargo')
-  async CreateCargo(@Body() createCargo: Cargo[]) {
-    this.complieteCargoService.createCargo(createCargo);
+  async CreateCargo(
+    @Body() Cargo: Array<CreateCargoDTO>
+  ): Promise<Array<Cargo>> {
+    return this.complieteCargoService.createCargo(convertCargo(Cargo));
   }
 
   /**
@@ -26,15 +28,15 @@ export class ComplietCargoController {
   async loadTransport(
     @Body() transport: Array<CreateTransportDto>,
   ): Promise<Array<Transport>> {
-    return this.complieteCargoService.addTransport(convert(transport));
+    return this.complieteCargoService.addTransport(convertTS(transport));
   }
 
-  @Post('TS')
+ /* @Post('TS')
   async CreateTS(
     @Body() createTS: Array<Transport>,
     cargo: Cargo,
     pro: Problem[],
   ) {
     // this.complieteCargo.createTS(createTS, cargo, pro);
-  }
+  }*/
 }

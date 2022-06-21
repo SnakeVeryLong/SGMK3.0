@@ -1,4 +1,4 @@
-import { Transport } from './entities/tranport.entity';
+import { Transport } from './entities/transport.entity';
 
 async function createMany(ts: Transport[]) {
   const queryRunner = this.dataSource.createQueryRunner();

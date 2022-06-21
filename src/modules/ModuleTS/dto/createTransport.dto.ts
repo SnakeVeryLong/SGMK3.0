@@ -1,4 +1,4 @@
-import { Transport } from '../entities/tranport.entity';
+import { Transport } from '../entities/transport.entity';
 
 export class CreateTransportDto {
   transportNumber: string;
@@ -14,7 +14,7 @@ export class CreateTransportDto {
   shipmentDate: Date;
 }
 
-export function convert(dto: Array<CreateTransportDto>): Array<Transport> {
+export function convertTS(dto: Array<CreateTransportDto>): Array<Transport> {
   return dto.map((item) => {
     const tmp = new Transport();
     Object.assign(tmp, item);

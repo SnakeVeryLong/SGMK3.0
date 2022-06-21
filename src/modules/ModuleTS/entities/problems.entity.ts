@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import { ProblemType } from './problemType.entity';
 import { Reception } from './Reception.entity';
-import { Transport } from './tranport.entity';
+import { Transport } from './transport.entity';
 
 @Entity()
 export class Problem {

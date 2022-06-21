@@ -2,8 +2,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Cargo } from '../../entities/cargo.entity';
-import { Problem } from '../../entities/problems.entity';
-import { Transport } from '../../entities/tranport.entity';
+import { Transport } from '../../entities/transport.entity';
 
 @Injectable()
 export class ComplietCargoService {
@@ -15,26 +14,48 @@ export class ComplietCargoService {
   ) {}
 
   async findAllTS(): Promise<Transport[]> {
-    return this.transportRepository.find({ relations: ['Cargo'] });
+    return this.transportRepository.find({ relations: ['cargo'] });
   }
 
-  async createCargo(cargo: Array<Cargo>): Promise<void> {
-    const CargoC = this.cargoRepository.create(cargo);
+  async createCargo(cargo: Array<Cargo>): Promise<Cargo[]> {
+   const getKey = (cargo: Cargo) => `${cargo.id}`;
+   try {
+     const douple = await this.cargoRepository.find({
+       where: cargo.map((item) =>{
+         return{
+           id: item.id,
+         }
+       })
+     })
 
-    console.log(CargoC);
-    await this.cargoRepository.save(CargoC);
+     const doupleFilter = new Set<string>(douple.map((item) => getKey(item)));
+     const filteredCargo = cargo.filter(
+       (item) => !doupleFilter.has(getKey(item)),
+     );
+     
+     if (!filteredCargo.length) return [];
+
+     return await this.cargoRepository.save(filteredCargo)
+   } catch (e){
+    Logger.error(
+      'Ошибка сохранения груза',
+      e,
+      'compliet-cargo.service.ts::addTransport',
+    );
+    throw new BadRequestException('Ошибка сохранения груза');
+   }
   }
 
   /**
    * Метод сохранения для ТС
    * @param transport - добавляемые ТС
    */
-  async addTransport(transport: Array<Transport>): Promise<Transport[]> {
+ async addTransport(transport: Array<Transport>): Promise<Transport[]> {
     const getKey = (ts: Transport) =>
-      `${ts.transportNumber}_${ts.documentNumber}_${ts.shipmentDate.getTime()}`;
+      `${ts.transportNumber}_${ts.documentNumber}_${ts.shipmentDate.getTime()}`; // переменная для создания ключа
     try {
       // Проверяем на дубли перед сохранением (номер ТС, номер накладной, дата отгрузки)
-      const douple = await this.transportRepository.find({
+      const douple = await this.transportRepository.find({  // выбор нужных значений класса из бд
         where: transport.map((item) => {
           return {
             transportNumber: item.transportNumber,
@@ -44,18 +65,18 @@ export class ComplietCargoService {
         }),
       });
 
-      const doupleFilter = new Set<string>(douple.map((item) => getKey(item)));
-      const filteredTransport = transport.filter(
+      const doupleFilter = new Set<string>(douple.map((item) => getKey(item))); // передача значений из бд созданному ключу в виде текста
+      const filteredTransport = transport.filter(   //возвращает массив типа transport, если выполняется условие, что getKey не имеет этой записи
         (item) => !doupleFilter.has(getKey(item)),
       );
 
-      if (!filteredTransport.length) return [];
+      if (!filteredTransport.length) return [];//если filteredTransport не возвращает пустой массив, то сохранить записи в бд
 
       // сохранение отфильтрованных ТС
       const savedTrapsort = await this.transportRepository.save(
         filteredTransport,
       );
-      return savedTrapsort;
+      return transport;
     } catch (e) {
       Logger.error(
         'Ошибка сохранения ТС',
@@ -66,11 +87,11 @@ export class ComplietCargoService {
     }
   }
 
-  async createTS(): Promise<void> {
+  /*async createTS(): Promise<void> {
     const tss = new Transport();
 
-    const tsc = this.transportRepository.create(tss);
+    const tsc = this.transportRepository.create(tss);  //это фуфу, но вдруг пригодится
     console.log(tsc);
     await this.transportRepository.save(tsc);
-  }
+  }*/
 }
